@@ -16,15 +16,12 @@ function CreateTestPatterns($namePrefix, $durationSeconds, $fps, $width, $height
     $outA = "$($namePrefix)_TestPatternA_$($fps)fps_$($height)p.mp4"
     $outB = "$($namePrefix)_TestPatternB_$($fps)fps_$($height)p.mp4"
 
-    # If a color is specified, we create an overlay in the given color to uniquely identify a variant of the test pattern.
+    # If a color is specified, we remove other colors from the mix.
     if ($color) {
-        $colorOpacity = "0.6"
-        $colorSource = "color=color=$($color)@$($colorOpacity):r=$($fps):s=$($width)x$($height) [color]"
+        $colorSource = "[video] chromahold=color=$($color):similarity=0.2 [out]"
 
-        $merge = "[video][color] overlay [out]"
-
-        $videoA = $videoA + " [video];" + $colorSource + ";" + $merge
-        $videoB = $videoB + " [video];" + $colorSource + ";" + $merge
+        $videoA = $videoA + " [video];" + $colorSource
+        $videoB = $videoB + " [video];" + $colorSource
     }
 
     ffmpeg -f lavfi -i "aevalsrc='$($leftAudio) | $($rightAudio):s=48000'" -f lavfi -i "$videoA" -pix_fmt yuv420p -acodec aac -ab 64k -t $durationSeconds -vcodec libx264 -tune animation $outA
@@ -38,64 +35,53 @@ function CreateTestPatterns($namePrefix, $durationSeconds, $fps, $width, $height
     }
 }
 
+$redcolor = $redcolor
+$greencolor = "limegreen"
+$bluecolor = "blue"
+
 # 360p
 
 CreateTestPatterns "1m" (60) 30 640 360
-CreateTestPatterns "1m_red" (60) 30 640 360 "red"
-CreateTestPatterns "1m_green" (60) 30 640 360 "green"
-CreateTestPatterns "1m_blue" (60) 30 640 360 "blue"
-
-CreateTestPatterns "1h" (3600) 30 640 360
-CreateTestPatterns "1h_red" (3600) 30 640 360 "red"
-CreateTestPatterns "1h_green" (3600) 30 640 360 "green"
-CreateTestPatterns "1h_blue" (3600) 30 640 360 "blue"
+CreateTestPatterns "1m_red" (60) 30 640 360 $redcolor
+CreateTestPatterns "1m_green" (60) 30 640 360 $greencolor
+CreateTestPatterns "1m_blue" (60) 30 640 360 $bluecolor
 
 CreateTestPatterns "3h" (3 * 3600) 30 640 360
-CreateTestPatterns "3h_red" (3 * 3600) 30 640 360 "red"
-CreateTestPatterns "3h_green" (3 * 3600) 30 640 360 "green"
-CreateTestPatterns "3h_blue" (3 * 3600) 30 640 360 "blue"
+CreateTestPatterns "3h_red" (3 * 3600) 30 640 360 $redcolor
+CreateTestPatterns "3h_green" (3 * 3600) 30 640 360 $greencolor
+CreateTestPatterns "3h_blue" (3 * 3600) 30 640 360 $bluecolor
 
 CreateTestPatterns "24h" (24 * 3600) 30 640 360
-CreateTestPatterns "24h_red" (24 * 3600) 30 640 360 "red"
-CreateTestPatterns "24h_green" (24 * 3600) 30 640 360 "green"
-CreateTestPatterns "24h_blue" (24 * 3600) 30 640 360 "blue"
+CreateTestPatterns "24h_red" (24 * 3600) 30 640 360 $redcolor
+CreateTestPatterns "24h_green" (24 * 3600) 30 640 360 $greencolor
+CreateTestPatterns "24h_blue" (24 * 3600) 30 640 360 $bluecolor
 
 # 1080p
 
 CreateTestPatterns "1m" (60) 30 1920 1080
-CreateTestPatterns "1m_red" (60) 30 1920 1080 "red"
-CreateTestPatterns "1m_green" (60) 30 1920 1080 "green"
-CreateTestPatterns "1m_blue" (60) 30 1920 1080 "blue"
-
-CreateTestPatterns "1h" (3600) 30 1920 1080
-CreateTestPatterns "1h_red" (3600) 30 1920 1080 "red"
-CreateTestPatterns "1h_green" (3600) 30 1920 1080 "green"
-CreateTestPatterns "1h_blue" (3600) 30 1920 1080 "blue"
+CreateTestPatterns "1m_red" (60) 30 1920 1080 $redcolor
+CreateTestPatterns "1m_green" (60) 30 1920 1080 $greencolor
+CreateTestPatterns "1m_blue" (60) 30 1920 1080 $bluecolor
 
 CreateTestPatterns "3h" (3 * 3600) 30 1920 1080
-CreateTestPatterns "3h_red" (3 * 3600) 30 1920 1080 "red"
-CreateTestPatterns "3h_green" (3 * 3600) 30 1920 1080 "green"
-CreateTestPatterns "3h_blue" (3 * 3600) 30 1920 1080 "blue"
+CreateTestPatterns "3h_red" (3 * 3600) 30 1920 1080 $redcolor
+CreateTestPatterns "3h_green" (3 * 3600) 30 1920 1080 $greencolor
+CreateTestPatterns "3h_blue" (3 * 3600) 30 1920 1080 $bluecolor
 
 CreateTestPatterns "24h" (24 * 3600) 30 1920 1080
-CreateTestPatterns "24h_red" (24 * 3600) 30 1920 1080 "red"
-CreateTestPatterns "24h_green" (24 * 3600) 30 1920 1080 "green"
-CreateTestPatterns "24h_blue" (24 * 3600) 30 1920 1080 "blue"
+CreateTestPatterns "24h_red" (24 * 3600) 30 1920 1080 $redcolor
+CreateTestPatterns "24h_green" (24 * 3600) 30 1920 1080 $greencolor
+CreateTestPatterns "24h_blue" (24 * 3600) 30 1920 1080 $bluecolor
 
 # We skip the 24h variants, because storage is cheap but not that cheap.
 # 2160p
 
 CreateTestPatterns "1m" (60) 30 3840 2160
-CreateTestPatterns "1m_red" (60) 30 3840 2160 "red"
-CreateTestPatterns "1m_green" (60) 30 3840 2160 "green"
-CreateTestPatterns "1m_blue" (60) 30 3840 2160 "blue"
-
-CreateTestPatterns "1h" (3600) 30 3840 2160
-CreateTestPatterns "1h_red" (3600) 30 3840 2160 "red"
-CreateTestPatterns "1h_green" (3600) 30 3840 2160 "green"
-CreateTestPatterns "1h_blue" (3600) 30 3840 2160 "blue"
+CreateTestPatterns "1m_red" (60) 30 3840 2160 $redcolor
+CreateTestPatterns "1m_green" (60) 30 3840 2160 $greencolor
+CreateTestPatterns "1m_blue" (60) 30 3840 2160 $bluecolor
 
 CreateTestPatterns "3h" (3 * 3600) 30 3840 2160
-CreateTestPatterns "3h_red" (3 * 3600) 30 3840 2160 "red"
-CreateTestPatterns "3h_green" (3 * 3600) 30 3840 2160 "green"
-CreateTestPatterns "3h_blue" (3 * 3600) 30 3840 2160 "blue"
+CreateTestPatterns "3h_red" (3 * 3600) 30 3840 2160 $redcolor
+CreateTestPatterns "3h_green" (3 * 3600) 30 3840 2160 $greencolor
+CreateTestPatterns "3h_blue" (3 * 3600) 30 3840 2160 $bluecolor
