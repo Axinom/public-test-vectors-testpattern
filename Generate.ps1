@@ -46,15 +46,13 @@ CreateTestPatterns "1m_red" (60) 30 640 360 $redcolor
 CreateTestPatterns "1m_green" (60) 30 640 360 $greencolor
 CreateTestPatterns "1m_blue" (60) 30 640 360 $bluecolor
 
-CreateTestPatterns "3h" (3 * 3600) 30 640 360
-CreateTestPatterns "3h_red" (3 * 3600) 30 640 360 $redcolor
-CreateTestPatterns "3h_green" (3 * 3600) 30 640 360 $greencolor
-CreateTestPatterns "3h_blue" (3 * 3600) 30 640 360 $bluecolor
+CreateTestPatterns "10m" (600) 30 640 360
+CreateTestPatterns "10m_red" (600) 30 640 360 $redcolor
+CreateTestPatterns "10m_green" (600) 30 640 360 $greencolor
+CreateTestPatterns "10m_blue" (600) 30 640 360 $bluecolor
 
+CreateTestPatterns "3h" (3 * 3600) 30 640 360
 CreateTestPatterns "24h" (24 * 3600) 30 640 360
-CreateTestPatterns "24h_red" (24 * 3600) 30 640 360 $redcolor
-CreateTestPatterns "24h_green" (24 * 3600) 30 640 360 $greencolor
-CreateTestPatterns "24h_blue" (24 * 3600) 30 640 360 $bluecolor
 
 # 1080p
 
@@ -63,17 +61,14 @@ CreateTestPatterns "1m_red" (60) 30 1920 1080 $redcolor
 CreateTestPatterns "1m_green" (60) 30 1920 1080 $greencolor
 CreateTestPatterns "1m_blue" (60) 30 1920 1080 $bluecolor
 
+CreateTestPatterns "10m" (600) 30 1920 1080
+CreateTestPatterns "10m_red" (600) 30 1920 1080 $redcolor
+CreateTestPatterns "10m_green" (600) 30 1920 1080 $greencolor
+CreateTestPatterns "10m_blue" (600) 30 1920 1080 $bluecolor
+
 CreateTestPatterns "3h" (3 * 3600) 30 1920 1080
-CreateTestPatterns "3h_red" (3 * 3600) 30 1920 1080 $redcolor
-CreateTestPatterns "3h_green" (3 * 3600) 30 1920 1080 $greencolor
-CreateTestPatterns "3h_blue" (3 * 3600) 30 1920 1080 $bluecolor
-
 CreateTestPatterns "24h" (24 * 3600) 30 1920 1080
-CreateTestPatterns "24h_red" (24 * 3600) 30 1920 1080 $redcolor
-CreateTestPatterns "24h_green" (24 * 3600) 30 1920 1080 $greencolor
-CreateTestPatterns "24h_blue" (24 * 3600) 30 1920 1080 $bluecolor
 
-# We skip the 24h variants, because storage is cheap but not that cheap.
 # 2160p
 
 CreateTestPatterns "1m" (60) 30 3840 2160
@@ -81,7 +76,7 @@ CreateTestPatterns "1m_red" (60) 30 3840 2160 $redcolor
 CreateTestPatterns "1m_green" (60) 30 3840 2160 $greencolor
 CreateTestPatterns "1m_blue" (60) 30 3840 2160 $bluecolor
 
-CreateTestPatterns "3h" (3 * 3600) 30 3840 2160
-CreateTestPatterns "3h_red" (3 * 3600) 30 3840 2160 $redcolor
-CreateTestPatterns "3h_green" (3 * 3600) 30 3840 2160 $greencolor
-CreateTestPatterns "3h_blue" (3 * 3600) 30 3840 2160 $bluecolor
+CreateTestPatterns "10m" (600) 30 3840 2160
+CreateTestPatterns "10m_red" (600) 30 3840 2160 $redcolor
+CreateTestPatterns "10m_green" (600) 30 3840 2160 $greencolor
+CreateTestPatterns "10m_blue" (600) 30 3840 2160 $bluecolor
